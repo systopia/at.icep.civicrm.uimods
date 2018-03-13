@@ -13,10 +13,14 @@
 | written permission from the original author(s).        |
 +--------------------------------------------------------*/
 
-(function($) {
-  $(document).on('ready crmLoad', function() {
+(function ($) {
+  $(document).on('ready crmLoad', function () {
     var $contactSummary = $('#contact-summary');
     var $contactForm = $('form#Contact');
+    var $emailForm = $('form#Email');
+    var $phoneForm = $('form#Phone');
+    var $addressForm = $('form.CRM_Contact_Form_Inline_Address');
+    var $noteForm = $('form.CRM_Note_Form_Note');
 
     // Hide contact properties on the contact summary.
     $('.crm-contact-nick_name', $contactSummary).closest('.crm-summary-row').hide();
@@ -40,11 +44,71 @@
     $('input[name="legal_name"]', $contactForm).closest('td').hide();
     $('input[name="sic_code"]', $contactForm).closest('td').hide();
 
-    $('input.is-bulkmail', $contactForm).closest('td').hide();
-    $('td.is-bulkmail-header', $contactForm).hide();
+    // Hide e-mail form elements.
+    $('input.is-bulkmail', $contactForm).closest('td').hide()
+    // And the corresponding field label in the table "header".
+        .each(function () {
+          var colCount = 1;
+          $(this).prevAll('td').each(function () {
+            if ($(this).attr('colspan')) {
+              colCount += +$(this).attr('colspan');
+            }
+            else {
+              colCount++;
+            }
+          });
+          $(this).closest('tr').prevAll('tr').not('[id]').first().find('td:nth-child(' + colCount + ')').hide();
+        });
+    $('input.is-bulkmail', $emailForm).closest('td').hide()
+    // And the corresponding field label in the table "header".
+        .each(function () {
+          var colCount = 1;
+          $(this).prevAll('td').each(function () {
+            if ($(this).attr('colspan')) {
+              colCount += +$(this).attr('colspan');
+            }
+            else {
+              colCount++;
+            }
+          });
+          $(this).closest('tr').prevAll('tr').not('[id]').first().find('td:nth-child(' + colCount + ')').hide();
+        });
 
-    $('select.phone-type-id', $contactForm).closest('td').hide();
-    $('td.phone-type-header', $contactForm).hide();
+    // Hide phone form elements.
+    $('select.phone-type-id', $contactForm).closest('td').hide()
+    // And the corresponding field label in the table "header".
+        .each(function () {
+          var colCount = 1;
+          $(this).prevAll('td').each(function () {
+            if ($(this).attr('colspan')) {
+              colCount += +$(this).attr('colspan');
+            }
+            else {
+              colCount++;
+            }
+          });
+          $(this).closest('tr').prevAll('tr').not('[id]').first().find('td:nth-child(' + colCount + ')').hide();
+        });
+    $('select.phone-type-id', $phoneForm).closest('td').hide()
+    // And the corresponding field label in the table "header".
+        .each(function () {
+          var colCount = 1;
+          $(this).prevAll('td').each(function () {
+            if ($(this).attr('colspan')) {
+              colCount += +$(this).attr('colspan');
+            }
+            else {
+              colCount++;
+            }
+          });
+          $(this).closest('tr').prevAll('tr').not('[id]').first().find('td:nth-child(' + colCount + ')').hide();
+        });
+
+    // Hide note form elements.
+    $('input.is-billing', $contactForm).closest('td').hide();
+    $('input.is-billing', $addressForm).closest('td').hide();
+
+    $('input[name="subject"]', $noteForm).closest('tr').hide();
   });
 
 })(cj);

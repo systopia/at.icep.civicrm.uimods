@@ -168,6 +168,8 @@ function uimods_civicrm_buildForm($formName, &$form) {
     || $formName == 'CRM_Contact_Form_Inline_Email'
     || $formName == 'CRM_Contact_Form_Edit_Phone'
     || $formName == 'CRM_Contact_Form_Inline_Phone'
+    || $formName == 'CRM_Contact_Form_Edit_Address'
+    || $formName == 'CRM_Contact_Form_Inline_Address'
   ) {
     foreach ($form->_elements as $index => $element) {
       /* @var \HTML_QuickForm_element $element */
@@ -176,6 +178,9 @@ function uimods_civicrm_buildForm($formName, &$form) {
       }
       if (strpos($element->getAttribute('name'), '[phone_type_id]') !== FALSE) {
         $element->setAttribute('class', 'phone-type-id');
+      }
+      if (strpos($element->getAttribute('name'), '[is_billing]') !== FALSE) {
+        $element->setAttribute('class', 'is-billing');
       }
     }
     CRM_Uimods_Contact::buildForm($formName, $form);
