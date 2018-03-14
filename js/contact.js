@@ -21,6 +21,7 @@
     var $phoneForm = $('form#Phone');
     var $addressForm = $('form.CRM_Contact_Form_Inline_Address');
     var $noteForm = $('form.CRM_Note_Form_Note');
+    var $notesTable = $('#notes table#options');
 
     // Hide contact properties on the contact summary.
     $('.crm-contact-nick_name', $contactSummary).closest('.crm-summary-row').hide();
@@ -102,6 +103,28 @@
           });
           $(this).closest('tr').prevAll('tr').not('[id]').first().find('td:nth-child(' + colCount + ')').hide();
         });
+
+    // Hide subject field from notes table.
+    $('td.crm-note-subject', $notesTable).hide()
+    // And the corresponding table header column.
+        .each(function() {
+          var colCount = 1;
+          $(this).prevAll('td').each(function () {
+            if ($(this).attr('colspan')) {
+              colCount += +$(this).attr('colspan');
+            }
+            else {
+              colCount++;
+            }
+          });
+          $(this).closest('table').find('thead').find('tr').find('th:nth-child(' + colCount + ')').hide();
+        });
+
+    // Hide note fields from note view block.
+    var $noteViewBlock = $('.crm-note-view-block');
+    if ($noteViewBlock.length && typeof(CRM.uimods) !== 'undefined') {
+      $noteViewBlock.find('td.label:contains(' + CRM.uimods.ts.noteSubject + ')').closest('tr').hide();
+    }
 
     // Hide note form elements.
     $('.is_billing-address-element', $contactForm).hide();

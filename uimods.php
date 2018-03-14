@@ -194,7 +194,20 @@ function uimods_civicrm_buildForm($formName, &$form) {
  */
 function uimods_civicrm_pageRun(&$page) {
   $pageName = $page->getVar('_name');
+
   if ($pageName == 'CRM_Contact_Page_View_Summary') {
     CRM_Uimods_Contact::pageRun($page);
+  }
+
+  if ($pageName == 'CRM_Contact_Page_View_Note') {
+    $extensionSettings = array(
+      'ts' => array(
+        'noteSubject' => ts('Subject'),
+      ),
+    );
+    $script = 'CRM.uimods = CRM.uimods || ' . json_encode($extensionSettings);
+    CRM_Core_Region::instance('page-header')->add(array(
+      'script' => $script,
+    ));
   }
 }

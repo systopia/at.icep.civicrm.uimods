@@ -28,14 +28,14 @@ class CRM_Uimods_Contact {
   public static function pageRun(&$page) {
     $script = file_get_contents(__DIR__ . '/../../js/contact.js');
     CRM_Core_Region::instance('page-body')->add(array(
-      'script' => $script
+      'script' => $script,
     ));
   }
 
   public static function buildForm($formName, &$form) {
     $script = file_get_contents(__DIR__ . '/../../js/contact.js');
     CRM_Core_Region::instance('page-body')->add(array(
-      'script' => $script
+      'script' => $script,
     ));
   }
 
