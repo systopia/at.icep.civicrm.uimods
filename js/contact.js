@@ -28,7 +28,6 @@
     $('.crm-contact-gender_display', $contactSummary).closest('.crm-summary-row').hide();
     $('.crm-contact-legal_name', $contactSummary).closest('.crm-summary-row').hide();
     $('.crm-contact-sic_code', $contactSummary).closest('.crm-summary-row').hide();
-    $('.crm-summary-block#contactinfo-block', $contactSummary).hide();
 
     // Hide contact fields on inline forms on the contact summary.
     $('input[name="nick_name"]', $contactSummary).closest('.crm-summary-row').hide();
