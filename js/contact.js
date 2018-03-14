@@ -105,8 +105,8 @@
         });
 
     // Hide note form elements.
-    $('input.is-billing', $contactForm).closest('td').hide();
-    $('input.is-billing', $addressForm).closest('td').hide();
+    $('.is_billing-address-element', $contactForm).hide();
+    $('.is_billing-address-element', $addressForm).hide();
 
     $('input[name="subject"]', $noteForm).closest('tr').hide();
   });
